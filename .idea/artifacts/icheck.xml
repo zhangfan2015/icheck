@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="icheck">
+    <output-path>$PROJECT_DIR$/out/artifacts/icheck</output-path>
+    <root id="root" />
+  </artifact>
+</component>

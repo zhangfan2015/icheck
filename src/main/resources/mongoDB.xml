@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+
+    <bean id="mongoServerAddress" class="com.mongodb.ServerAddress">
+        <constructor-arg value="127.0.0.1"/>
+        <constructor-arg value="27017"/>
+    </bean>
+
+
+    <bean id="mongoClient" class="com.mongodb.MongoClient" destroy-method="close">
+        <constructor-arg ref="mongoServerAddress"/>
+    </bean>
+
+    <bean id="morphia" class="org.mongodb.morphia.Morphia"/>
+
+    <bean id="datastore" class="org.mongodb.morphia.Datastore" factory-bean="morphia" factory-method="createDatastore">
+        <constructor-arg ref="mongoClient"/>
+        <constructor-arg value="iCheck"/>
+    </bean>
+</beans>
