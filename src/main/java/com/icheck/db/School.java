@@ -10,7 +10,7 @@ import org.mongodb.morphia.annotations.Property;
  * Time: 0:47
  * To change this template use File | Settings | File Templates.
  */
-@Entity(value = "school")
+@Entity(value = "school", noClassnameStored = true)
 public class School {
 
     final public static  String FIELD_initials = "initials";

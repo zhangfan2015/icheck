@@ -25,7 +25,7 @@ public class Lession {
 
 
     @ResponseBody
-    @RequestMapping(value="/getLessionForTeacher")
+    @RequestMapping(value="/getLessionForTeacher",produces = "text/json;charset=UTF-8")
     public String getLessionForTeacher(String date,String teacherId) {
         try {
 
@@ -43,7 +43,7 @@ public class Lession {
 
 
     @ResponseBody
-    @RequestMapping(value="/demo")
+    @RequestMapping(value="/demo",produces = "text/json;charset=UTF-8")
     public String aaaa() {
         try {
             Query<CheckinLog> checkinLogQuery = datastore.createQuery(CheckinLog.class);

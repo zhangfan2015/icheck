@@ -12,7 +12,7 @@ import java.util.List;
  * Time: 23:29
  * To change this template use File | Settings | File Templates.
  */
-@Entity(value = "LessionForTeacher")
+@Entity(value = "LessionForTeacher", noClassnameStored = true)
 public class LessionForTeacher {
 
 

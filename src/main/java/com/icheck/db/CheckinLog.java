@@ -4,7 +4,7 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Property;
 
 
-@Entity(value = "checklog")
+@Entity(value = "checklog", noClassnameStored = true)
 public class CheckinLog {
 
     public static final String FIELD_name = "name";
