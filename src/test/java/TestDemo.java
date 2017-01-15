@@ -1,9 +1,12 @@
 import com.icheck.db.CheckinLog;
+import com.icheck.db.LessionForTeacher;
 import com.mongodb.MongoClient;
 import org.junit.Test;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.query.Query;
+
+import java.util.Date;
 
 
 public class TestDemo {
@@ -22,5 +25,23 @@ public class TestDemo {
         for(CheckinLog i:checkinLogQuery.asList()){
             System.out.print(i.getName());
         }
+    }
+
+
+    /**
+     * 增加教师课程
+     */
+    @Test
+    public void savelessionsForTeacher(){
+        init();
+        LessionForTeacher lft = new LessionForTeacher();
+        lft.setAddress("教室1");
+        lft.setTeacherId("123");
+        lft.setDate("2017-1-17");
+        lft.setName("测试课程1");
+        lft.setStartTime(new Date().getTime());
+        lft.setEndTime(new Date().getTime()+100);
+        datastore.save(lft);
+
     }
 }
