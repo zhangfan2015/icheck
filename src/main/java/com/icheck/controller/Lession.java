@@ -1,6 +1,8 @@
 package com.icheck.controller;
 
+import com.google.gson.Gson;
 import com.icheck.db.CheckinLog;
+import com.icheck.db.LessionForTeacher;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,24 @@ public class Lession {
 
     @Autowired
     private Datastore datastore;
+
+
+    @ResponseBody
+    @RequestMapping(value="/getLessionForTeacher")
+    public String getLessionForTeacher(String date,String teacherId) {
+        try {
+
+            Query<LessionForTeacher> checkinLogQuery = datastore.createQuery(LessionForTeacher.class);
+            checkinLogQuery.criteria(LessionForTeacher.FIELD_teacherId).equal(teacherId)
+                    .criteria(LessionForTeacher.FIELD_date).equal(date);
+            return  new Gson().toJson(checkinLogQuery.asList());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
 
 
     @ResponseBody
