@@ -24,6 +24,8 @@ public class LessionForTeacher {
     final public static  String FIELD_endTime = "endTime";
     final public static  String FIELD_classIds = "classIds";
     final public static  String FIELD_date = "date";
+    final public static  String FIELD_time = "time";
+    final public static  String FIELD_index = "index";
 
 
     @Property(FIELD_teacherId)
@@ -36,7 +38,7 @@ public class LessionForTeacher {
     public String name;//课程名称
 
     @Property(FIELD_address)
-    public String address;//上课地址（可能多个地址）
+    public String address;//上课地址
 
     @Property(FIELD_startTime)
     public Long  startTime;
@@ -45,10 +47,16 @@ public class LessionForTeacher {
     public Long endTime;
 
     @Property(FIELD_classIds)
-    public List<String> classIds;
+    public List<String> classIds;//参课班级
 
     @Property(FIELD_date)
-    public String date;
+    public String date;//该课程记录日期
+
+    @Property(FIELD_time)
+    public String time;//上课起始时间
+
+    @Property(FIELD_index)
+    public Integer index;//当天课程索引
 
 
     public String getTeacherId() {
@@ -113,5 +121,21 @@ public class LessionForTeacher {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public Integer getIndex() {
+        return index;
+    }
+
+    public void setIndex(Integer index) {
+        this.index = index;
     }
 }

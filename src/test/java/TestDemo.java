@@ -1,3 +1,4 @@
+import com.google.common.collect.Lists;
 import com.icheck.db.CheckinLog;
 import com.icheck.db.LessionForTeacher;
 import com.mongodb.MongoClient;
@@ -37,8 +38,9 @@ public class TestDemo {
         LessionForTeacher lft = new LessionForTeacher();
         lft.setAddress("教室1");
         lft.setTeacherId("123");
-        lft.setDate("2017-1-17");
+        lft.setDate("2017-01-17");
         lft.setName("测试课程1");
+        lft.setClassIds(Lists.newArrayList("软件1501","软件1502","软件1503"));
         lft.setStartTime(new Date().getTime());
         lft.setEndTime(new Date().getTime()+100);
         datastore.save(lft);
