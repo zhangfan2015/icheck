@@ -1,6 +1,7 @@
 package com.icheck.db;
 
 import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Property;
 
 /**
@@ -15,7 +16,11 @@ public class School {
 
     final public static  String FIELD_initials = "initials";
     final public static  String FIELD_name = "name";
+    final public static  String FIELD_id = "id";
 
+    @Id
+    @Property(FIELD_id)
+    public String id;
 
     @Property(FIELD_initials)
     public String initials;
@@ -37,5 +42,13 @@ public class School {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

@@ -2,7 +2,7 @@ package com.icheck.controller;
 
 import com.google.gson.Gson;
 import com.icheck.db.CheckinLog;
-import com.icheck.db.LessionForTeacher;
+import com.icheck.db.Schedule;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,16 +27,23 @@ public class Lession {
 
 
     @ResponseBody
-    @RequestMapping(value="/getLessionForTeacher",produces = "text/json;charset=UTF-8")
-    public String getLessionForTeacher(String date,String teacherId) {
+    @RequestMapping(value="/getLessionByRole",produces = "text/json;charset=UTF-8")
+    public String getLessionByRole(String date,String userId,int role) {
         try {
-            Query<LessionForTeacher> checkinLogQuery = datastore.createQuery(LessionForTeacher.class);
-            checkinLogQuery.criteria(LessionForTeacher.FIELD_teacherId).equal(teacherId)
-                    .criteria(LessionForTeacher.FIELD_date).equal(date);
-            checkinLogQuery.order(LessionForTeacher.FIELD_startTime);
-            List<LessionForTeacher> lessionForTeacherList = checkinLogQuery.asList();
+            if(role==0){
+                return "请重新登录";
+            }
+            Query<Schedule> checkinLogQuery = datastore.createQuery(Schedule.class);
+            checkinLogQuery.criteria(Schedule.FIELD_date).equal(date);
+            if(role==1){
+                checkinLogQuery.criteria(Schedule.FIELD_teacherId).equal(userId);
+            }else{
+                checkinLogQuery.criteria(Schedule.FIELD_studentIds).hasThisOne(userId);
+            }
+            checkinLogQuery.order(Schedule.FIELD_startTime);
+            List<Schedule> lessionForTeacherList = checkinLogQuery.asList();
             int i=1;
-            for (LessionForTeacher l:lessionForTeacherList){
+            for (Schedule l:lessionForTeacherList){
                 l.setIndex(i++);
             }
             System.out.print(checkinLogQuery.toString()+"总计"+checkinLogQuery.count());

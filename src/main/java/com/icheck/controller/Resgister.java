@@ -1,6 +1,7 @@
 package com.icheck.controller;
 
 import com.google.gson.Gson;
+import com.icheck.db.Account;
 import com.icheck.db.School;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -43,19 +44,23 @@ public class Resgister {
     }
     @ResponseBody
     @RequestMapping(value="/signUp" ,produces = "text/json;charset=UTF-8" )
-    public String signUp(String phoneNumber ,String name ,String pwd){
+    public String signUp(String schoolName,String schoolId,String jwUserId,String jwPwd,String phoneNumber ,String name,String role){
 
         try {
-            CloseableHttpClient httpClient = HttpClients.createDefault();
-            HttpGet get = new HttpGet("http://jw.djtu.edu.cn/academic/j_acegi_security_check");
-
-            HttpResponse response = httpClient.execute(get);
+            Account a= new Account();
+            a.setSchoolName(schoolName);
+            a.setSchoolId(schoolId);
+            a.setJwUserId(jwUserId);
+            a.setJwUserPWD(jwPwd);
+            a.setPhoneNum(phoneNumber);
+            a.setRole(role);
+            datastore.save(a);
         }catch (Exception e){
+            e.printStackTrace();
             //注册考虑校方登录校验的问题
         }
 
-
-        System.out.print(phoneNumber+name+pwd);
+        System.out.print(phoneNumber+name+role);
         return "success";
 
     }

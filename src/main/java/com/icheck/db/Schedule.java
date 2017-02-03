@@ -6,15 +6,10 @@ import org.mongodb.morphia.annotations.Property;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Administrator
- * Date: 2017/1/15
- * Time: 23:29
- * To change this template use File | Settings | File Templates.
+ * Created by Administrator on 2017/1/29.
  */
-@Entity(value = "LessionForTeacher", noClassnameStored = true)
-public class LessionForTeacher {
-
+@Entity(value = "Schedule", noClassnameStored = true)
+public class Schedule {
 
     final public static  String FIELD_teacherId = "teacherId";
     final public static  String FIELD_lessioinId = "lessioinId";
@@ -26,6 +21,7 @@ public class LessionForTeacher {
     final public static  String FIELD_date = "date";
     final public static  String FIELD_time = "time";
     final public static  String FIELD_index = "index";
+    final public static  String FIELD_studentIds = "studentIds";
 
 
     @Property(FIELD_teacherId)
@@ -48,6 +44,9 @@ public class LessionForTeacher {
 
     @Property(FIELD_classIds)
     public List<String> classIds;//参课班级
+
+    @Property(FIELD_studentIds)
+    public List<String> studentIds;//参课学生集合
 
     @Property(FIELD_date)
     public String date;//该课程记录日期
@@ -137,5 +136,13 @@ public class LessionForTeacher {
 
     public void setIndex(Integer index) {
         this.index = index;
+    }
+
+    public List<String> getStudentIds() {
+        return studentIds;
+    }
+
+    public void setStudentIds(List<String> studentIds) {
+        this.studentIds = studentIds;
     }
 }
