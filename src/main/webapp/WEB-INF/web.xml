@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<web-app version="2.4"
-         xmlns="http://java.sun.com/xml/ns/j2ee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
-        http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1"
+         metadata-complete="true">
 
     <display-name>iCheck</display-name>
 
@@ -13,10 +14,13 @@
         <param-value>classpath:applicationContext.xml</param-value>
     </context-param>
 
+
     <!--Spring mvc 载入 -->
     <servlet>
         <servlet-name>springMvc</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!--让Servlet支持文件上传-->
+        <multipart-config/>
     </servlet>
 
     <listener>

@@ -1,6 +1,7 @@
 package com.icheck.db;
 
 import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Property;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 public class Schedule {
 
     final public static  String FIELD_teacherId = "teacherId";
+    final public static  String FIELD_teacherName = "teacherName";
     final public static  String FIELD_lessioinId = "lessioinId";
     final public static  String FIELD_address = "address";
     final public static  String FIELD_name = "name";
@@ -22,7 +24,14 @@ public class Schedule {
     final public static  String FIELD_time = "time";
     final public static  String FIELD_index = "index";
     final public static  String FIELD_studentIds = "studentIds";
+    final public static  String FIELD_id = "id";
 
+    @Id
+    @Property(FIELD_id)
+    public String id;
+
+    @Property(FIELD_teacherName)
+    public String teacherName;
 
     @Property(FIELD_teacherId)
     public String teacherId;
@@ -144,5 +153,21 @@ public class Schedule {
 
     public void setStudentIds(List<String> studentIds) {
         this.studentIds = studentIds;
+    }
+
+    public String getTeacherName() {
+        return teacherName;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

@@ -1,6 +1,7 @@
 import com.google.common.collect.Lists;
 import com.icheck.db.CheckinLog;
 import com.icheck.db.Schedule;
+import com.icheck.vo.CheckinLogsResult;
 import com.mongodb.MongoClient;
 import org.junit.Test;
 import org.mongodb.morphia.Datastore;
@@ -51,6 +52,24 @@ public class TestDemo {
             e.printStackTrace();
         }
 
+    }
 
+    /**
+     * 签到假数据
+     */
+    @Test
+    public void createCheckinlogs(){
+        try{
+            init();
+            CheckinLog log = new CheckinLog();
+            log.setCreateTime(System.currentTimeMillis());
+            log.setName("张三");
+            log.setCheckinStatus(0);
+            log.setJwUserId("0001");
+            log.setScheduleId("589b517f254dbebd9485244d");
+            datastore.save(log);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

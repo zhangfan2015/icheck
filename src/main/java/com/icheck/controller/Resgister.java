@@ -3,18 +3,13 @@ package com.icheck.controller;
 import com.google.gson.Gson;
 import com.icheck.db.Account;
 import com.icheck.db.School;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Key;
 import org.mongodb.morphia.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import sun.net.www.http.HttpClient;
 
 /**
  * Created with IntelliJ IDEA.
@@ -42,6 +37,18 @@ public class Resgister {
         return new Gson().toJson(schoolQuery.asList());
 
     }
+
+    /**
+     * 注册接口
+     * @param schoolName
+     * @param schoolId
+     * @param jwUserId
+     * @param jwPwd
+     * @param phoneNumber
+     * @param name
+     * @param role
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value="/signUp" ,produces = "text/json;charset=UTF-8" )
     public String signUp(String schoolName,String schoolId,String jwUserId,String jwPwd,String phoneNumber ,String name,String role){
@@ -54,15 +61,16 @@ public class Resgister {
             a.setJwUserPWD(jwPwd);
             a.setPhoneNum(phoneNumber);
             a.setRole(role);
-            datastore.save(a);
-        }catch (Exception e){
-            e.printStackTrace();
-            //注册考虑校方登录校验的问题
-        }
+            Key<Account> account = datastore.save(a);
+
 
         System.out.print(phoneNumber+name+role);
-        return "success";
-
+        return String.valueOf(account.getId());
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+            //注册考虑校方登录校验的问题
+        }
     }
 
 }
